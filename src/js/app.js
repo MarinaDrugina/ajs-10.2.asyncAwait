@@ -1,18 +1,10 @@
-import json from './parser.js';
-import read from './reader.js';
-import GameSaving from './gamesaving.js';
+import GameSavingLoader from './gamesavingloader.js';
 
-let gameSav = new GameSaving();
-
-const gameSavLoad = (async () => {
+(async () => {
   try {
-    const readResolve = await read();
-    const saving = await json(readResolve);
-    gameSav = JSON.parse(saving);
-    return gameSav;
+    const saving = await GameSavingLoader.load();
+    console.log(saving);
   } catch (error) {
     throw new Error('Oops!');
   }
 })();
-
-export default gameSavLoad;
